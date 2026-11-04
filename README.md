@@ -1,6 +1,6 @@
 # Agent Skills
 
-`initialize-workflow` sets up a Git project for tiered plan approval, step-by-step commit review, and a retrospective. The same skill works in Codex and Claude Code.
+`initialize-workflow` sets up a Git project for tiered plan approval, step-by-step commit review, and a retrospective. `sync-workflow` keeps project docs and agent guidance aligned with the code. Both skills work in Codex and Claude Code.
 
 ## Install and initialize
 
@@ -21,3 +21,17 @@ For a non-interactive install in both agents, run `npx skills add uaandrei/agent
 The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, and `.workflow/standards.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, and workflow files.
 
 For existing `AGENTS.md` and `CLAUDE.md` files, the initializer appends guidance for missing references and preserves the original content. It leaves symlinks and all other existing files as they are.
+
+## Sync an existing project
+
+Install `sync-workflow` for Codex and Claude Code from your target project.
+
+```sh
+npx skills add uaandrei/agent-skills --skill sync-workflow --agent codex claude-code -y
+```
+
+Invoke `$sync-workflow` in Codex or `/sync-workflow` in Claude Code. Use it for a general pass over an existing project or give it a specific feature, branch, or range to check after an AI-assisted change.
+
+The skill checks workflow files and relevant project docs against current code, configuration, and tests. It asks about unclear findings and shows a proposed diff for verified fixes. It waits for your approval before editing and follows any additional project approval rules.
+
+If the project lacks the Code Factory workflow, the skill asks whether to initialize it first or sync the existing docs. Ask for a dry run to review the findings without changing the project.
