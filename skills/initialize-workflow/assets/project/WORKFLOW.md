@@ -1,8 +1,3 @@
----
-name: code-factory
-description: Run the Code Factory workflow for a Git project when the user wants tiered plan approvals, per-step commit reviews, or to resume a Code Factory work item.
----
-
 # Code Factory workflow
 
 Work from the target repository root in the existing checkout and on its current branch. Keep workflow records in that repository and include them in reviewed Git changes. Read `.workflow/standards.md` before planning. If it is missing, create it with a `# Project standards` heading for standards accepted in retrospectives. Preserve existing standards and work items.
