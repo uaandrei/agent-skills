@@ -1,7 +1,8 @@
 # Project instructions
 
-Consult [ARCHITECTURE.md](ARCHITECTURE.md) for the system design and [DOCUMENTATION.md](DOCUMENTATION.md) for setup, usage, and operations guides.
+Consult [ARCHITECTURE.md](ARCHITECTURE.md) for the system design.
 
-Follow the workflow below when planning and implementing project changes.
+Consult [DOCUMENTATION.md](DOCUMENTATION.md) for setup, usage, and operations guides.
 
+Follow the imported workflow when planning and implementing project changes.
 @WORKFLOW.md

@@ -6,7 +6,7 @@ description: Initialize or restore missing files for the Code Factory workflow i
 # Initialize workflow
 
 1. Identify the target project root. For a Git project, use its repository root.
-2. From that root, run `node` with the absolute path to the bundled [initializer](scripts/initialize.mjs), resolved relative to this skill's `SKILL.md`. It copies the [project templates](assets/project/) to their matching paths in the target project and preserves existing files. If Node is unavailable, copy the same templates into missing paths only.
-3. Report the files created and any conflicts that prevented setup. If an existing `AGENTS.md` or `CLAUDE.md` is missing a reference to `ARCHITECTURE.md`, `DOCUMENTATION.md`, or `WORKFLOW.md`, report which references to add.
+2. From that root, run `node` with the absolute path to the bundled [initializer](scripts/initialize.mjs), resolved relative to this skill's `SKILL.md`. It copies the [project templates](assets/project/) to missing paths and appends guidance for missing references to existing regular `AGENTS.md` and `CLAUDE.md` files. If Node is unavailable, copy the templates into missing paths and append the corresponding template paragraphs for missing references to those two files.
+3. Report the files created or updated and any conflicts that prevented setup. For a symlinked agent file, report any missing references so the project can decide where to add them.
 
 When the user requests project work after setup, read the project's `WORKFLOW.md` and follow its approval process. Initialization itself is complete once the project files are in place.

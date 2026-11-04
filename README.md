@@ -20,4 +20,4 @@ For a non-interactive install in both agents, run `npx skills add uaandrei/agent
 
 The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, and `.workflow/standards.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, and workflow files.
 
-Existing files are kept on setup and on reruns. If you already have agent instructions, add any missing references to `ARCHITECTURE.md`, `DOCUMENTATION.md`, and `WORKFLOW.md`.
+For existing `AGENTS.md` and `CLAUDE.md` files, the initializer appends guidance for missing references and preserves the original content. It leaves symlinks and all other existing files as they are.
