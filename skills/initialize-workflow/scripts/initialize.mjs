@@ -7,7 +7,7 @@ const projectRoot = process.cwd();
 const templateRoot = fileURLToPath(new URL("../assets/project/", import.meta.url));
 const lockName = ".initialize-workflow.lock";
 const lockPath = join(projectRoot, lockName);
-const documentReference = /(?<![\w./-])(?:\.\/)?((?:ARCHITECTURE|DOCUMENTATION|WORKFLOW)\.md)(?![\w/-]|\.\w)/g;
+const documentReference = /(?<![\w./-])(?:\.\/)?((?:ARCHITECTURE|DOCUMENTATION|WORKFLOW|\.workflow\/backlog)\.md)(?![\w/-]|\.\w)/g;
 const glossaryLink = /\]\(\s*<?(?:\.\/)?glossary\.md>?(?=\s|\))/;
 
 function referencedDocuments(text) {

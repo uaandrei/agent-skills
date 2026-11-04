@@ -4,6 +4,14 @@ Work from the target repository root in the existing checkout and on its current
 
 Read [glossary.md](glossary.md) when starting or resuming a work item. Apply the naming review rules from the project instructions during idea refinement, planning, and implementation. Include glossary changes in the same reviewed step as the work that introduces or changes the terms. Check the glossary during step verification and revisit outstanding naming decisions in the retrospective.
 
+## Backlog
+
+Use [`.workflow/backlog.md`](.workflow/backlog.md) to track issues and feature ideas. The user can edit the file directly or ask the agent to maintain it. Handle backlog-only requests as direct edits. Re-read the backlog before editing, update an existing entry when it covers the same work, and preserve unrelated user edits.
+
+During a work item, capture deferred follow-ups with enough context to revisit them and link to the source work item where relevant. Include backlog updates in the relevant step or retrospective review. Use the overall plan revision process for newly discovered work that needs to be done in the current work item.
+
+When the user selects a backlog entry to implement, record its ID in `idea.md` and link to the work item from the entry. Follow the usual plan and approvals. Mark the entry **In progress** in the first implementation step's review. Mark it **Done** in the retrospective once the work is verified and all planned steps are committed.
+
 ## 1. Capture and refine the idea
 
 Create `.workflow/work-items/<stable-id>-<short-name>/` for a new item. In `idea.md`, capture the original request, the current brief, and open questions. Clarify material uncertainties with the user and record changes to the brief with their reasons. When resuming, read the existing brief, plan, and relevant step records to recover the approved scope and the next pending decision.
@@ -30,7 +38,7 @@ Pick a step whose dependencies are satisfied. Write its detailed plan in `steps/
 
 Pause a step if it rises to tier 4 or 5 or if its approved detailed plan materially changes. Record why and obtain approval for the revised detailed plan before continuing. If it adds work, follow the overall plan revision process first.
 
-For newly discovered work, including small scope additions and documentation changes, propose a revised overall plan before implementing it. Show the new work, why it came up, its tier, and the affected steps. Keep the approved version identifiable while the revision is pending. Pause dependent work and continue independent approved steps where practical. Record the user's decision and apply the usual tier rules after approval.
+For newly discovered work you intend to take on in the current work item, including small scope additions and documentation changes, propose a revised overall plan before implementing it. Show the new work, why it came up, its tier, and the affected steps. Keep the approved version identifiable while the revision is pending. Pause dependent work and continue independent approved steps where practical. Record the user's decision and apply the usual tier rules after approval.
 
 ## 4. Verify, review, and ask to commit
 

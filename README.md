@@ -18,11 +18,17 @@ node .agents/skills/initialize-workflow/scripts/initialize.mjs
 
 For a non-interactive install in both agents, run `npx skills add uaandrei/agent-skills --skill initialize-workflow --agent codex claude-code -y`.
 
-The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, `glossary.md`, and `.workflow/standards.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, glossary, and workflow files.
+The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, `glossary.md`, `.workflow/standards.md`, and `.workflow/backlog.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, glossary, and workflow files. `AGENTS.md` also links directly to the backlog.
 
 The skill seeds the glossary with verified project terms. The workflow keeps it current across work items and asks for your review when names conflict, look similar, or could refer to the same concept.
 
 For existing `AGENTS.md` and `CLAUDE.md` files, the initializer appends guidance for missing references and preserves the original content. It leaves symlinks and all other existing files as they are.
+
+## Track issues and features
+
+Edit `.workflow/backlog.md` directly or ask the agent to update it. The workflow records deferred follow-ups there during work and tracks progress when you select an entry to implement. Each entry has a stable ID, type, status, and space for notes and work-item links.
+
+For a project initialized before the backlog was added, rerun the updated initializer to create the backlog file. Merge the [Backlog section](skills/initialize-workflow/assets/project/WORKFLOW.md#backlog) into your existing `WORKFLOW.md`, or use `sync-workflow` to review the integration.
 
 ## Sync an existing project
 
