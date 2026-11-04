@@ -8,9 +8,12 @@ const templateRoot = fileURLToPath(new URL("../assets/project/", import.meta.url
 const lockName = ".initialize-workflow.lock";
 const lockPath = join(projectRoot, lockName);
 const documentReference = /(?<![\w./-])(?:\.\/)?((?:ARCHITECTURE|DOCUMENTATION|WORKFLOW)\.md)(?![\w/-]|\.\w)/g;
+const glossaryLink = /\]\(\s*<?(?:\.\/)?glossary\.md>?(?=\s|\))/;
 
 function referencedDocuments(text) {
-  return Array.from(text.matchAll(documentReference), ([, filename]) => filename);
+  const documents = Array.from(text.matchAll(documentReference), ([, filename]) => filename);
+  if (glossaryLink.test(text)) documents.push("glossary.md");
+  return documents;
 }
 
 async function appendMissingGuidance(template, target) {

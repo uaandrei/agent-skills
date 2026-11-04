@@ -2,6 +2,8 @@
 
 Work from the target repository root in the existing checkout and on its current branch. Keep workflow records in that repository and include them in reviewed Git changes. Read `.workflow/standards.md` before planning. If it is missing, create it with a `# Project standards` heading for standards accepted in retrospectives. Preserve existing standards and work items.
 
+Read [glossary.md](glossary.md) when starting or resuming a work item. Apply the naming review rules from the project instructions during idea refinement, planning, and implementation. Include glossary changes in the same reviewed step as the work that introduces or changes the terms. Check the glossary during step verification and revisit outstanding naming decisions in the retrospective.
+
 ## 1. Capture and refine the idea
 
 Create `.workflow/work-items/<stable-id>-<short-name>/` for a new item. In `idea.md`, capture the original request, the current brief, and open questions. Clarify material uncertainties with the user and record changes to the brief with their reasons. When resuming, read the existing brief, plan, and relevant step records to recover the approved scope and the next pending decision.
