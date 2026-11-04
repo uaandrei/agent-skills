@@ -18,6 +18,6 @@ node .agents/skills/initialize-workflow/scripts/initialize.mjs
 
 For a non-interactive install in both agents, run `npx skills add uaandrei/agent-skills --skill initialize-workflow --agent codex claude-code -y`.
 
-The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, and `.workflow/standards.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` so future sessions can find the workflow.
+The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, and `.workflow/standards.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, and workflow files.
 
-Existing files are kept on setup and on reruns. If you already have agent instructions, add a reference to `WORKFLOW.md` there to enable the workflow in future sessions.
+Existing files are kept on setup and on reruns. If you already have agent instructions, add any missing references to `ARCHITECTURE.md`, `DOCUMENTATION.md`, and `WORKFLOW.md`.
