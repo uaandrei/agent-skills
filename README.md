@@ -1,6 +1,6 @@
 # Agent Skills
 
-`initialize-workflow` sets up a Git project for tiered plan approval, step-by-step commit review, and a retrospective. `sync-workflow` keeps project docs and agent guidance aligned with the code. Both skills work in Codex and Claude Code.
+`initialize-workflow` sets up a Git project for tiered plan approval, step-by-step commit review, and a retrospective. `sync-workflow` keeps project docs and agent guidance aligned with the code and the skill's current templates. Both skills work in Codex and Claude Code.
 
 ## Install and initialize
 
@@ -70,14 +70,16 @@ For a project initialized before the backlog was added, rerun the updated initia
 
 ## Sync an existing project
 
-Install `sync-workflow` for Codex and Claude Code from your target project.
+Install `sync-workflow` and `initialize-workflow` for Codex and Claude Code from your target project. Sync uses the initializer's bundled documentation templates as its reference.
 
 ```sh
-npx skills add uaandrei/agent-skills --skill sync-workflow --agent codex claude-code -y
+npx skills add uaandrei/agent-skills --skill initialize-workflow sync-workflow --agent codex claude-code -y
 ```
 
 Invoke `$sync-workflow` in Codex or `/sync-workflow` in Claude Code. Use it for a general pass over an existing project or give it a specific feature, branch, or range to check after an AI-assisted change.
 
-The skill checks workflow files and relevant project docs against current code, configuration, and tests. It asks about unclear findings and presents verified corrections as current wording → proposed wording → evidence, with check results and the exact proposed diff available as supporting detail. It waits for your approval of those changes before editing and follows any additional project approval rules.
+Every run compares the project's workflow docs with the current skill templates, including the manifesto, agent instructions, workflow, documentation and architecture indexes, glossary guidance, standards guidance, and backlog format. This check also runs for a specific feature or branch, a clean working tree, and a dry run. Sync proposes merges that preserve project-specific content and reports any conflicts or unavailable templates.
+
+The skill also checks relevant project docs against current code, configuration, and tests. It asks about unclear findings and presents verified corrections as current wording → proposed wording → evidence, with check results and the exact proposed diff available as supporting detail. It waits for your approval of those changes before editing and follows any additional project approval rules.
 
 If the project lacks the Code Factory workflow, the skill asks whether to initialize it first or sync the existing docs. Ask for a dry run to review the findings without changing the project.

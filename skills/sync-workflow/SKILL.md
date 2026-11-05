@@ -1,16 +1,23 @@
 ---
 name: sync-workflow
-description: Review workflow files, glossary entries, and relevant project docs against verified project evidence, then propose fixes for approval. Use for an existing project or after a code change, including AI-assisted work, when project docs or Code Factory workflow references may have drifted.
+description: Review project docs against the Code Factory skill templates and verified project evidence, then propose fixes for approval. Use for an existing project or after a code change, including AI-assisted work, when project docs or workflow guidance may have drifted.
 ---
 
 # Sync workflow
 
 ## Set the scope
 
-- Identify the target repository and any requested package or feature. Read the applicable agent instructions, `WORKFLOW.md`, and `.workflow/standards.md` where present. If there is an active work item for this change, read its approved scope and pending decisions.
+- Identify the target repository and any requested package or feature. Read the project's `manifesto.md` first where present, then the applicable agent instructions, `WORKFLOW.md`, and `.workflow/standards.md`. If there is an active work item for this change, read its approved scope and pending decisions.
 - For a sync in a project without an established Code Factory workflow, ask whether to run `initialize-workflow` first or continue with the existing docs. Wait for the answer before syncing. If the user chooses setup, use the installed initializer and read the resulting workflow rules before continuing. If the initializer is unavailable, explain how to install it and wait for setup or a decision to proceed with the existing docs. For an audit, report, or dry run, keep the work read-only and report whether setup is missing.
 - For a recent change, use the requested branch, commits, or work item to bound the audit. Inspect relevant committed, staged, unstaged, and untracked changes. Use the working tree as the current state unless the user specifies another snapshot. If no reliable comparison point exists, inspect the current implementation in scope. For a general sync, review the project's documentation against its current implementation even when Git is clean.
 - Use the project's existing documentation structure. Check workflow files for stale factual references, including `AGENTS.md`, `CLAUDE.md`, `WORKFLOW.md`, and `.workflow/standards.md` where present. Review `ARCHITECTURE.md`, `DOCUMENTATION.md`, the relevant architecture notes and guides they link to, and other relevant docs such as the README. Read the root `glossary.md` or the glossary named by the project. Report a missing glossary when the workflow expects one.
+
+## Compare with the skill docs on every run
+
+- For every Code Factory project sync, including scoped syncs, clean working trees, audits, and dry runs, compare the project's workflow documentation with the current `initialize-workflow` skill's `assets/project/` Markdown templates. Locate the installed skill or its source checkout, read the templates, and identify the source used in the review. If the templates are unavailable, ask for the initializer skill or its source location, continue independent evidence checks, and report the template comparison as blocked. Do not claim the project docs are up to date without completing it.
+- Check every template's project counterpart, including `manifesto.md`, `AGENTS.md`, `CLAUDE.md`, `WORKFLOW.md`, `ARCHITECTURE.md`, `DOCUMENTATION.md`, `glossary.md`, `.workflow/standards.md`, and `.workflow/backlog.md`. Identify missing files and missing, outdated, or conflicting guidance. Compare the meaning of the instructions, required sections, links, and formats; an existing filename or heading is insufficient. Include template updates in the proposal even when they are unrelated to the requested code change.
+- Propose a focused merge of current template guidance into the project's existing docs. Preserve project-specific content, populated indexes, glossary terms, accepted standards, backlog entries, and work-item history. Make conflicts with project decisions explicit and ask the user to resolve them before changing the affected rules. Rerunning the initializer only restores missing files and selected agent guidance; it does not update existing workflow docs and cannot replace this comparison.
+- Include template differences and their source references in the same review brief and proposed diff as evidence-based corrections. Keep audits and dry runs read-only and apply updates only through the approval process below. Treat unavailable templates, pending conflicts, and unapproved updates as unresolved when reporting sync completion.
 
 ## Establish what changed
 
@@ -23,7 +30,7 @@ description: Review workflow files, glossary entries, and relevant project docs 
 
 ## Propose changes and wait for approval
 
-- If nothing is stale, report the checks and leave the working tree alone. For a read-only request, report the findings and show a proposed diff if requested.
+- If nothing is stale against either the skill templates or project evidence, report the checks and leave the working tree alone. For a read-only request, report the findings and show a proposed diff if requested.
 - Otherwise, present a review brief in plain language before the diff. Explain what needs correcting and why, then show each correction as **current wording → proposed wording → evidence** with file references. State when a file or section is being added or removed. Summarize how the corrections meet the requested scope, the checks performed and their results, any checks not run, and claims checked only by inspection. Identify decisions, remaining uncertainty, or material risks needing the user's attention, and state when none remain.
 - List all files in the proposal, including any required planning records. Prepare the exact proposed unified diff without writing to the target project and make it available as supporting detail through a working link, an expandable view, or on request. Keep the brief and diff aligned with the same proposed changes. Ask for explicit approval of those changes and wait before editing, even if an existing plan covers the work. Approval applies to the exact proposed changes represented by the brief and supporting diff.
 - After approval, follow any remaining project gates before applying the fixes. Create required planning records at this stage and use an existing approved plan if it covers the sync. If scope needs an extension, follow the project's revision process. Recheck the affected files before editing. If the proposed changes differ, present the revised brief with its supporting diff available and wait for approval again.
@@ -31,5 +38,5 @@ description: Review workflow files, glossary entries, and relevant project docs 
 ## Apply and verify
 
 - Make focused edits that preserve existing guidance and unrelated working-tree changes. Keep indexes and their linked pages consistent in the same update. Use the project's generation process when the affected docs are generated. Leave source code and configuration changes for separately scoped work.
-- Re-read each edited claim against its evidence. Recheck edited glossary entries against current usage and the full glossary. Check affected links, paths, and anchors, and run focused project checks or documented commands when they can be run safely and locally. Review the final diff against what the user approved and check for unrelated edits and stale references.
+- Re-read each edited claim against its evidence and recheck the project docs against the skill templates for remaining gaps. Recheck edited glossary entries against current usage and the full glossary. Check affected links, paths, and anchors, and run focused project checks or documented commands when they can be run safely and locally. Review the final diff against what the user approved and check for unrelated edits and stale references.
 - Report what changed or what the audit found, with file references and checks run. Identify any unresolved questions, pending approvals, or claims that could only be checked by inspection. Stage or commit only with explicit authorization.
