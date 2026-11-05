@@ -42,10 +42,19 @@ For newly discovered work you intend to take on in the current work item, includ
 
 ## 4. Verify, review, and ask to commit
 
-Review the diff against the approved outcome and run the agreed checks. Record the results, review feedback, and lessons worth discussing in the step file. Show the proposed commit diff, including relevant work log updates, the check results, and the proposed commit message. Describe the changes in plain words in at most two sentences. Ask **“Commit this step?”**
+Review the diff against the approved outcome and run the agreed checks. Record the results, review feedback, and lessons worth discussing in the step file. Present a review brief in plain language so the user can understand and assess the change before opening the diff. Scale the explanation to the change's complexity and cover:
 
-After explicit approval, commit only the reviewed changes on the current branch. If the user requests revisions or the reviewed diff changes, verify and present the updated diff for approval. Record the resulting commit hash in the step file and include it in the next approved log update for the work item.
+- **What changed and why:** Explain the outcome and how it meets the approved step.
+- **Before → after:** Give concrete examples of the old and new behavior. For documentation edits, show the current and proposed wording with the reason for the correction.
+- **Acceptance checks:** List each agreed outcome with its check result and supporting evidence. Distinguish checks that passed, failed, or were not run, and identify claims checked only by inspection.
+- **Needs your attention:** Identify decisions, remaining uncertainty, and material risks. State when none remain.
+- **Scope and details:** List the files included in the proposed commit, including relevant work log updates, and link to the code or documentation that supports the explanation. Make the full proposed commit diff available through a working link, an expandable view, or on request.
+- **Proposed commit message:** Give the message for the changes being reviewed.
+
+For UI changes, include screenshots, a preview, or a walkthrough the user can follow, and state what was actually inspected. For tiers 4–5, explain affected contracts, permissions, or data and how to recover; for tier 5, include rollout controls. Keep the brief and supporting diff aligned with the same proposed commit. Ask **“Commit this step?”**
+
+After explicit approval, commit only the reviewed changes on the current branch. If the user requests revisions or the reviewed diff changes, verify and present the updated review brief with its supporting diff available for approval again. Record the resulting commit hash in the step file and include it in the next approved log update for the work item.
 
 ## 5. Retrospective
 
-After the planned steps are complete, review the lessons with the user. In `retrospective.md`, record which lessons to adopt, revisit, or dismiss and why. Add adopted lessons to `.workflow/standards.md` with what to do, when it applies, and why. Show the retrospective diff, including any standards updates and the final step's commit reference. Ask for approval before committing it on the current branch.
+After the planned steps are complete, review the lessons with the user. In `retrospective.md`, record which lessons to adopt, revisit, or dismiss and why. Add adopted lessons to `.workflow/standards.md` with what to do, when it applies, and why. Use the review brief format from step 4: for each lesson, show the experience that supports it, the proposed decision, and how adopting it would change future work. Show the current and proposed standards wording where applicable, identify decisions still needing the user, and include the final step's commit reference in the review. List the files to commit, provide the proposed commit message, and make the full retrospective diff available as supporting detail. Ask for approval before committing it on the current branch. If the proposed changes differ after review, update the brief and supporting diff and obtain approval again.
