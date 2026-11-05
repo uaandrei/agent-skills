@@ -20,9 +20,11 @@ For a non-interactive install in both agents, run `npx skills add uaandrei/agent
 
 The initializer creates `WORKFLOW.md`, `DOCUMENTATION.md`, `ARCHITECTURE.md`, `glossary.md`, `.workflow/standards.md`, and `.workflow/backlog.md`, plus folders for work items, architecture notes, and guides. It also creates `AGENTS.md` and `CLAUDE.md` with references to the architecture, documentation, glossary, and workflow files. `AGENTS.md` also links directly to the backlog.
 
+The initializer creates `manifesto.md` with rules that apply to every task and take precedence over other project instructions. It places the manifesto reference first in `AGENTS.md` and `CLAUDE.md`.
+
 The skill seeds the glossary with verified project terms. The workflow keeps it current across work items and asks for your review when names conflict, look similar, or could refer to the same concept.
 
-For existing `AGENTS.md` and `CLAUDE.md` files, the initializer appends guidance for missing references and preserves the original content. It leaves symlinks and all other existing files as they are.
+For existing regular `AGENTS.md` and `CLAUDE.md` files, the initializer prepends the manifesto instruction if needed and appends guidance for other missing references, preserving the original content. It leaves symlinks and all other existing files as they are.
 
 ## Track issues and features
 
