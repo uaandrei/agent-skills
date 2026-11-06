@@ -1,5 +1,5 @@
 interface:
   display_name: "End Dev"
-  short_description: "Stop applying the workflow"
+  short_description: "Record progress and propose learnings"
 policy:
   allow_implicit_invocation: false

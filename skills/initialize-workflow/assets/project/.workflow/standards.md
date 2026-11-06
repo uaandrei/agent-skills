@@ -1,3 +1,3 @@
 # Project standards
 
-Record standards the user chose to adopt from a work item's learnings. For each standard, describe what to do, when it applies, and why. Link to a project document when it explains the standard in more detail. Apply these standards in every stage of the workflow. [Learnings instructions](../WORKFLOW.md#9-study-the-context-and-extract-learnings)
+Rules for project work, promoted from learnings proposed at the end of a dev session. Each standard says what to do, when it applies, and why, and may link to a project document with more detail. Apply these standards when planning. [How learnings become standards](../WORKFLOW.md#end-a-dev-session)

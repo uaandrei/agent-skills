@@ -1,6 +1,6 @@
 ---
 name: start-dev
-description: Start a dev session so the project's Code Factory workflow applies to changes until end-dev. User-invoked.
+description: Start a dev session so the project's Code Factory workflow (capture idea, plan, review plan, implement with validation) applies to changes until end-dev. User-invoked.
 disable-model-invocation: true
 ---
 
