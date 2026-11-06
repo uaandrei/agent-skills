@@ -42,6 +42,8 @@ For existing regular `AGENTS.md` and `CLAUDE.md` files, the initializer prepends
 10. **Ask whether to standardize or discard each learning.** Standardized learnings go into `.workflow/standards.md`, which the agent applies in every stage of later work.
 11. **Ask you to review and commit** the learnings and standards changes.
 
+After stage 11, completed work item folders may be deleted. Standards and other shared project records stay in place, and links to deleted work items are replaced with commit hashes so their history remains accessible. Unfinished work items are retained, and deleted item IDs are not reused.
+
 ## Confirm changes
 
 When implementation is done, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or instructions to try it. The full diff is available on request.

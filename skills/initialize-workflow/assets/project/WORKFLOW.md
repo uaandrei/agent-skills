@@ -1,6 +1,6 @@
 # Code Factory workflow
 
-Take every project change through the stages below. Stages are the parts of this workflow; steps are the parts of a large plan. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository and include them in the commits you propose.
+Take every project change through the stages below. Stages are the parts of this workflow; steps are the parts of a large plan. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository through stage 11 and include them in the commits you propose. After the workflow ends, completed work items may be deleted as described below.
 
 Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossary.md) before you start or resume a work item. Apply the standards in every stage, from capturing the idea to committing. If a standard conflicts with the user's request, point out the conflict and ask how to proceed. Follow the naming rules in the project instructions whenever you introduce or rename a term, and include glossary edits in the same commit as the work that needs them.
 
@@ -12,7 +12,7 @@ When the user picks an entry to implement, record its ID in `idea.md` and link t
 
 ## 1. Capture the idea
 
-Create `.workflow/work-items/<id>-<short-name>/` using the next available three-digit ID, such as `007-fix-search-case`. In `idea.md`, record the original request, the intended outcome, and open questions. Ask the user about anything that would change the outcome and record their answers. When resuming, read the work item's files to find where it stopped.
+Create `.workflow/work-items/<id>-<short-name>/` using the next available three-digit ID, such as `007-fix-search-case`. Check existing work items and Git history so IDs from deleted work items are not reused. In `idea.md`, record the original request, the intended outcome, and open questions. Ask the user about anything that would change the outcome and record their answers. When resuming, read the work item's files to find where it stopped.
 
 ## 2. Assess whether the work is small or large
 
@@ -73,3 +73,9 @@ Standards are applied throughout this workflow, so a new standard takes effect f
 ## 11. Ask to review and commit
 
 Present the decisions in `learnings.md`, the standards changes as current wording → proposed wording, the files to commit, and the proposed commit message. Ask **"Commit these learnings?"** If the user asks for changes, revise and ask again. After explicit approval, commit on the current branch.
+
+## Completed work item cleanup
+
+After a work item finishes stage 11, its directory under `.workflow/work-items/` may be deleted. Keep records for unfinished work items, including those whose implementation is done but whose confirmation, commits, or learnings review is still pending.
+
+Keep adopted standards, glossary entries, project documentation, and backlog entries in their shared files. Before deleting a completed work item's directory, replace links to it in retained files with the Git commit hash containing its final records, so the history remains accessible. Include the deletions and reference updates in the next commit proposed and approved under stage 8.
