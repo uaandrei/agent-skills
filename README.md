@@ -1,6 +1,6 @@
 # Agent Skills
 
-`initialize-workflow` sets up a Git project for a plan-first workflow: the agent sizes each piece of work, gets your go-ahead on a plan, asks you to confirm each change before committing it, and turns what it learned into project standards you approve. It works in Codex and Claude Code.
+`initialize-workflow` sets up a Git project for a plan-first workflow: the agent sizes each piece of work, gets your go-ahead on a plan, validates each implementation, asks you to confirm it and approve its commit, and turns what it learned into project standards you approve. Large plans repeat implementation, validation, confirmation, and commit approval for every step. It works in Codex and Claude Code.
 
 ## Install and initialize
 
@@ -34,12 +34,12 @@ For existing regular `AGENTS.md` and `CLAUDE.md` files, the initializer prepends
 
 1. **Capture the idea** in a work item under `.workflow/work-items/`, linked to a backlog entry marked **In progress**.
 2. **Assess whether it is small or large.** Small work fits in one commit; large work needs several.
-3. **Small:** propose a plan.
-4. **Large:** split the work into steps that can each be committed on their own, then propose a plan.
+3. **Small:** propose a plan with implementation and validation phases, including concrete checks and expected results.
+4. **Large:** split the work into steps that can each be committed on their own, each with implementation and validation phases, then propose a plan.
 5. **Present the plan** and ask whether to continue or revise it.
-6. **Implement the plan.** Large work goes one plan step at a time, repeating stages 6–8 for each step.
+6. **Implement and validate the plan.** Record validation results for the small plan or current large-plan step. Large work repeats stages 6–8 for each step.
 7. **Ask you to confirm the implementation.**
-8. **Ask to commit.**
+8. **Ask to commit.** For a large plan, ask after every validated and confirmed step, including the last, and wait for approval and a successful commit before starting the next step.
 9. **Study the context and extract learnings** from your feedback, corrections, and anything that was harder than expected.
 10. **Ask whether to standardize or discard each learning.** Standardized learnings go into `.workflow/standards.md`, which the agent applies in every stage of later work.
 11. **Ask you to review and commit** the learnings, standards changes, and backlog completion summary, marking the entry **Done** in that commit.
@@ -48,9 +48,11 @@ After stage 11, completed work item folders may be deleted. Standards and other 
 
 ## Confirm changes
 
-When implementation is done, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or instructions to try it. The full diff is available on request.
+Every small plan and every step of a large plan has a validation phase after implementation. The agent runs the agreed checks, records expected and actual results in `plan.md`, and updates the backlog. Required checks must pass before confirmation or commit approval; changes requested during review go through validation again.
 
-After you confirm the implementation, the agent lists the files to commit and the proposed commit message and waits for your explicit approval before committing.
+After validation, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or instructions to try it. The full diff is available on request.
+
+After you confirm the implementation, the agent lists the files to commit and the proposed commit message and waits for your explicit approval before committing. For a large plan, it identifies the step and asks **“Commit step `<id>`?”** every time. Each step completes validation, confirmation, approval, and its commit before the next starts.
 
 <details>
 <summary>Example</summary>

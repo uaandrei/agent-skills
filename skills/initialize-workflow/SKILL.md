@@ -1,6 +1,6 @@
 ---
 name: initialize-workflow
-description: Initialize or restore missing files for the Code Factory workflow in a project, including a mandatory project manifesto, a plan-first workflow that confirms each change before committing it and turns learnings into project standards, an issue and feature backlog kept current from chat through each workflow stage, documentation and architecture indexes, a maintained project glossary, project standards, and agent instructions.
+description: Initialize or restore missing files for the Code Factory workflow in a project, including a mandatory project manifesto, a plan-first workflow with validation, implementation confirmation, and explicit commit approval for each plan or step, learnings that become project standards, an issue and feature backlog kept current from chat through each workflow stage, documentation and architecture indexes, a maintained project glossary, project standards, and agent instructions.
 ---
 
 # Initialize workflow

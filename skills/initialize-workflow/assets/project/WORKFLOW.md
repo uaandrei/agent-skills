@@ -15,8 +15,8 @@ When starting a work item, record its backlog ID in `idea.md` and link the work 
 | Status | When to use it | Progress to record in the notes |
 | --- | --- | --- |
 | **Open** | A request is captured but work has not started, or the user returns it to the backlog. | Requested outcome, constraints, and any reason for deferral. |
-| **In progress** | Work starts in stage 1, through planning, implementation, confirmation, commits, and learnings review. | Current stage, current step for a large plan, latest checks and results, completed and remaining work, blockers, and pending user decisions or approvals. |
-| **Done** | All planned work is confirmed and committed, and the learnings review is complete. | Completion summary and relevant commit hashes; include this status in the stage 11 commit. |
+| **In progress** | Work starts in stage 1, through planning, implementation, validation, confirmation, commits, and learnings review. | Current stage and implementation or validation phase, current step for a large plan, latest checks and results, completed and remaining work, blockers, and pending user decisions or approvals. |
+| **Done** | All planned work is validated, confirmed, and committed, and the learnings review is complete. | Completion summary and relevant commit hashes; include this status in the stage 11 commit. |
 | **Closed** | The user withdraws or declines a request. | Reason for closure and any replacement entry. |
 
 Update the entry as each stage or plan step progresses, when feedback changes the scope, when checks or commits change the result, and before pausing for the user. A failed check or pending approval stays **In progress** with the blocker or next action in the notes. Reopen a finished entry when the same outcome needs more work, or link a new entry for a separate follow-up.
@@ -36,40 +36,50 @@ If you are unsure, treat the work as large. Record the assessment and the reason
 
 ## 3. Small: propose a plan
 
-In `plan.md`, describe the outcome, the changes and the files they affect, and how you will verify the result. Call out decisions the user needs to make and risks such as changes to public contracts, permissions, stored data, or anything hard to undo.
+In `plan.md`, describe the outcome and define two phases: **Implementation**, with the changes and the files they affect, and **Validation**, with concrete checks and the expected results that demonstrate the outcome. Choose validation appropriate to the change, such as targeted tests, build or static checks, manual behavior checks, UI previews, or documentation and link review. Call out decisions the user needs to make and risks such as changes to public contracts, permissions, stored data, or anything hard to undo.
 
 Include documentation and glossary updates in the plan. Follow the project's documentation structure. Where it has none, put architecture topics in `docs/architecture/` and how-to topics in `docs/guides/`, and update the links in `ARCHITECTURE.md` or `DOCUMENTATION.md` in the same commit.
 
 ## 4. Large: split into steps and propose a plan
 
-In `plan.md`, state the overall outcome and split the work into ordered steps. Make each step small by the criteria in stage 2 so it can be implemented, confirmed, and committed on its own. For each step, give an ID, its outcome, the changes, how you will verify it, and the steps it depends on. Call out decisions, risks, and documentation updates as in stage 3.
+In `plan.md`, state the overall outcome and split the work into ordered steps. Make each step small by the criteria in stage 2 so it can be implemented, validated, confirmed, and committed on its own. For each step, give an ID, its outcome, the steps it depends on, an **Implementation** phase describing its changes, and a **Validation** phase with concrete checks and expected results as in stage 3. Include checks for the combined behavior as steps build on earlier work. Each step must finish validation, implementation confirmation, and its own commit approval before the next step starts. Call out decisions, risks, and documentation updates as in stage 3.
 
 ## 5. Present the plan and ask to continue
 
 Show the user the size assessment with its reason and the full plan. Ask **"Continue with this plan, or do you have feedback?"** If the user gives feedback, revise `plan.md` and present it again. Do not start implementing until the user says to continue. Mark the approved version in `plan.md`.
 
-## 6. Implement the plan
+## 6. Implement and validate the plan
 
-Implement the approved plan and run the verification it describes. For a large plan, implement one step at a time in order and finish stages 7 and 8 for each step before starting the next.
+For a small plan, complete both phases below for the whole plan. For a large plan, complete both phases for one step at a time in order, then finish stages 7 and 8 for that step before starting the next. Every plan or step implementation includes its own validation phase.
+
+### Implementation phase
+
+Implement the approved small plan or the current step of the approved large plan.
 
 If you find work outside the approved plan, or the approach needs to change, update the backlog, stop, and return to stage 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item as separate **Open** backlog entries linked to the current work item.
 
+### Validation phase
+
+Run the validation checks defined for this plan or step against the implementation. Record each check, its expected and actual results, and supporting evidence in `plan.md` under the relevant plan or step. Update the backlog with the validation phase, results, and any blockers.
+
+Resolve failures and rerun the affected checks. If a required check cannot be completed, record the blocker and return to stage 5 to agree on a revised validation approach. Required checks must pass before asking for implementation confirmation or commit approval. Repeat validation after any implementation changes requested during review.
+
 ## 7. Ask to confirm the implementation
 
-Summarize the change in plain language so the user can judge it without reading the diff:
+After validation passes, summarize the implemented plan or current step in plain language so the user can judge it without reading the diff. For a large plan, identify the step by its ID and outcome:
 
 - **What changed and why:** the outcome and how it meets the plan.
 - **Before → after:** concrete examples of the old and new behavior. For documentation edits, show the current and new wording.
-- **Checks:** each planned check and its result. Say which checks passed, failed, or were not run, and which claims you checked only by reading the code.
+- **Checks:** each planned validation check, its expected and actual results, and supporting evidence. Identify claims checked only by inspection and any optional checks not run, with the reason.
 - **Needs your attention:** decisions, remaining uncertainty, and risks, or "None".
 
-For UI changes, include screenshots, a preview, or instructions the user can follow to try it. Offer the full diff on request. Ask **"Does this implementation look right?"** If the user asks for changes, make them and present the updated summary again.
+For UI changes, include screenshots, a preview, or instructions the user can follow to try it. Offer the full diff on request. Ask **"Does this implementation look right?"** If the user asks for changes, make them, repeat the validation phase in stage 6, and present the updated summary again.
 
 ## 8. Ask to commit
 
-List the files to commit, including work item records and any glossary, backlog, or documentation edits, and the proposed commit message. Ask **"Commit this?"** After the user's explicit approval, commit only those files on the current branch.
+After the user confirms the validated implementation, list the files to commit, including work item records and any glossary, backlog, or documentation edits, and the proposed commit message. For a small plan, ask **"Commit this?"** For a large plan, identify the current step and ask **"Commit step `<id>`?"** after every step, including the last. Wait for explicit approval for this commit; approval of the plan or an earlier step does not approve it. After approval, commit only those files on the current branch.
 
-Record the commit hash in `plan.md`; it goes into the next commit. For a large plan with steps remaining, return to stage 6 for the next step.
+Record the successful commit's hash in `plan.md` and update the backlog; these records go into the next commit. Start the next step only after the current step's validation, confirmation, explicit commit approval, and commit have all completed successfully. If approval is withheld or the commit fails, keep the current step **In progress** with the pending action in the backlog. For a large plan with steps remaining, return to stage 6 for the next step.
 
 ## 9. Study the context and extract learnings
 
