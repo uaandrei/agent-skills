@@ -6,13 +6,26 @@ Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossa
 
 ## Backlog
 
-Use [`.workflow/backlog.md`](.workflow/backlog.md) to track issues and feature ideas. The user can edit it directly or ask you to. Handle backlog-only requests as direct edits without a work item. Re-read the backlog before editing it, update an existing entry when it covers the same work, and preserve the user's edits.
+Keep [`.workflow/backlog.md`](.workflow/backlog.md) current with project change requests from chat without waiting for the user to ask for a backlog update. Capture requests to fix, add, or change something, including corrections and deferred follow-ups. Update the existing entry when a request refines the same outcome; create separate entries for independently actionable requests. Record the requested outcome and relevant constraints in the notes. Questions or discussion without a requested project change do not need entries.
 
-When the user picks an entry to implement, record its ID in `idea.md` and link the work item from the entry. Mark the entry **In progress** in the first implementation commit and **Done** in the learnings commit in stage 11.
+When starting or resuming work, reconcile the available conversation and work item records with the backlog: capture missing requests, apply the user's latest scope changes, and correct stale progress. Re-read the backlog before editing it and preserve the user's edits, stable IDs, and unrelated entries. Handle backlog-only requests as direct edits without a work item.
+
+When starting a work item, record its backlog ID in `idea.md` and link the work item from the entry. Keep the status and notes current throughout the workflow:
+
+| Status | When to use it | Progress to record in the notes |
+| --- | --- | --- |
+| **Open** | A request is captured but work has not started, or the user returns it to the backlog. | Requested outcome, constraints, and any reason for deferral. |
+| **In progress** | Work starts in stage 1, through planning, implementation, confirmation, commits, and learnings review. | Current stage, current step for a large plan, latest checks and results, completed and remaining work, blockers, and pending user decisions or approvals. |
+| **Done** | All planned work is confirmed and committed, and the learnings review is complete. | Completion summary and relevant commit hashes; include this status in the stage 11 commit. |
+| **Closed** | The user withdraws or declines a request. | Reason for closure and any replacement entry. |
+
+Update the entry as each stage or plan step progresses, when feedback changes the scope, when checks or commits change the result, and before pausing for the user. A failed check or pending approval stays **In progress** with the blocker or next action in the notes. Reopen a finished entry when the same outcome needs more work, or link a new entry for a separate follow-up.
+
+Make these backlog updates as the events happen, without a separate approval step or waiting for a commit. Include them in the next commit approved under stage 8 or 11. Capturing a request in the backlog does not bypass the workflow's plan, implementation, or commit approvals.
 
 ## 1. Capture the idea
 
-Create `.workflow/work-items/<id>-<short-name>/` using the next available three-digit ID, such as `007-fix-search-case`. Check existing work items and Git history so IDs from deleted work items are not reused. In `idea.md`, record the original request, the intended outcome, and open questions. Ask the user about anything that would change the outcome and record their answers. When resuming, read the work item's files to find where it stopped.
+Create `.workflow/work-items/<id>-<short-name>/` using the next available three-digit ID, such as `007-fix-search-case`. Check existing work items and Git history so IDs from deleted work items are not reused. In `idea.md`, record the original request, the intended outcome, open questions, and the corresponding backlog ID. Create or update the backlog entry, link this work item, and mark it **In progress** with stage 1 in the notes. Ask the user about anything that would change the outcome and record their answers in the work item and backlog. When resuming, read the work item's files to find where it stopped and reconcile its backlog entry.
 
 ## 2. Assess whether the work is small or large
 
@@ -39,7 +52,7 @@ Show the user the size assessment with its reason and the full plan. Ask **"Cont
 
 Implement the approved plan and run the verification it describes. For a large plan, implement one step at a time in order and finish stages 7 and 8 for each step before starting the next.
 
-If you find work outside the approved plan, or the approach needs to change, stop and return to stage 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item to the backlog.
+If you find work outside the approved plan, or the approach needs to change, update the backlog, stop, and return to stage 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item as separate **Open** backlog entries linked to the current work item.
 
 ## 7. Ask to confirm the implementation
 
@@ -72,7 +85,7 @@ Standards are applied throughout this workflow, so a new standard takes effect f
 
 ## 11. Ask to review and commit
 
-Present the decisions in `learnings.md`, the standards changes as current wording → proposed wording, the files to commit, and the proposed commit message. Ask **"Commit these learnings?"** If the user asks for changes, revise and ask again. After explicit approval, commit on the current branch.
+Present the decisions in `learnings.md`, the standards changes as current wording → proposed wording, the backlog completion summary, the files to commit, and the proposed commit message. Ask **"Commit these learnings?"** If the user asks for changes, revise and ask again. After explicit approval, mark the backlog entry **Done** and commit on the current branch. If the commit fails, restore **In progress** and record the failure and next action in the notes.
 
 ## Completed work item cleanup
 
