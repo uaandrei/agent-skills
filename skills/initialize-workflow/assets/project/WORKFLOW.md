@@ -1,60 +1,75 @@
 # Code Factory workflow
 
-Work from the target repository root in the existing checkout and on its current branch. Keep workflow records in that repository and include them in reviewed Git changes. Read `.workflow/standards.md` before planning. If it is missing, create it with a `# Project standards` heading for standards accepted in retrospectives. Preserve existing standards and work items.
+Follow these steps for every project change. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository and include them in the commits you propose.
 
-Read [glossary.md](glossary.md) when starting or resuming a work item. Apply the naming review rules from the project instructions during idea refinement, planning, and implementation. Include glossary changes in the same reviewed step as the work that introduces or changes the terms. Check the glossary during step verification and revisit outstanding naming decisions in the retrospective.
+Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossary.md) before you start or resume a work item. Apply the standards in every step, from capturing the idea to committing. If a standard conflicts with the user's request, point out the conflict and ask how to proceed. Follow the naming rules in the project instructions whenever you introduce or rename a term, and include glossary edits in the same commit as the work that needs them.
 
 ## Backlog
 
-Use [`.workflow/backlog.md`](.workflow/backlog.md) to track issues and feature ideas. The user can edit the file directly or ask the agent to maintain it. Handle backlog-only requests as direct edits. Re-read the backlog before editing, update an existing entry when it covers the same work, and preserve unrelated user edits.
+Use [`.workflow/backlog.md`](.workflow/backlog.md) to track issues and feature ideas. The user can edit it directly or ask you to. Handle backlog-only requests as direct edits without a work item. Re-read the backlog before editing it, update an existing entry when it covers the same work, and preserve the user's edits.
 
-During a work item, capture deferred follow-ups with enough context to revisit them and link to the source work item where relevant. Include backlog updates in the relevant step or retrospective review. Use the overall plan revision process for newly discovered work that needs to be done in the current work item.
+When the user picks an entry to implement, record its ID in `idea.md` and link the work item from the entry. Mark the entry **In progress** in the first implementation commit and **Done** in the learnings commit in step 11.
 
-When the user selects a backlog entry to implement, record its ID in `idea.md` and link to the work item from the entry. Follow the usual plan and approvals. Mark the entry **In progress** in the first implementation step's review. Mark it **Done** in the retrospective once the work is verified and all planned steps are committed.
+## 1. Capture the idea
 
-## 1. Capture and refine the idea
+Create `.workflow/work-items/<id>-<short-name>/` using the next available three-digit ID, such as `007-fix-search-case`. In `idea.md`, record the original request, the intended outcome, and open questions. Ask the user about anything that would change the outcome and record their answers. When resuming, read the work item's files to find where it stopped.
 
-Create `.workflow/work-items/<stable-id>-<short-name>/` for a new item. In `idea.md`, capture the original request, the current brief, and open questions. Clarify material uncertainties with the user and record changes to the brief with their reasons. When resuming, read the existing brief, plan, and relevant step records to recover the approved scope and the next pending decision.
+## 2. Assess whether the work is small or large
 
-## 2. Build and review the overall plan
+- **Small:** a focused change with a clear approach that fits in one commit.
+- **Large:** work that should be reviewed in more than one commit, such as a change across several areas, a feature with separable parts, or work whose approach depends on earlier results.
 
-In `plan.md`, list reviewable steps with stable IDs, expected outcomes, verification methods, dependencies, tiers, and tier rationales. Use the highest tier that applies across complexity, impact, and uncertainty.
+If you are unsure, treat the work as large. Record the assessment and the reason in `plan.md`.
 
-| Tier | Criteria | Approval |
-| --- | --- | --- |
-| 1 · Routine | Localized change with an obvious approach and a quick check. | Overall plan |
-| 2 · Contained | Small behavior change in one area with a known test. | Overall plan |
-| 3 · Coordinated | Change across several areas with a clear design and a practical way to verify and reverse it. | Overall plan |
-| 4 · Consequential | Change to a public contract, permissions, or stored data, or a design decision that could materially change the outcome. | Overall plan and detailed step plan |
-| 5 · High impact | Change with broad consequences or difficult recovery. | Overall plan and detailed step plan with rollout and recovery |
+## 3. Small: propose a plan
 
-Show the full plan and wait for the user's approval before implementing any step. Record revisions, decisions, and the approved version. Set tiers 1–3 to **Approved** and keep tiers 4–5 at **Needs attention** until the user approves their detailed step plans.
+In `plan.md`, describe the outcome, the changes and the files they affect, and how you will verify the result. Call out decisions the user needs to make and risks such as changes to public contracts, permissions, stored data, or anything hard to undo.
 
-Include known documentation changes in the overall plan. Follow the project's documentation structure. Where it has none, use `docs/architecture/` for architecture topics and `docs/guides/` for how-to topics. Add or update the corresponding link in `ARCHITECTURE.md` or `DOCUMENTATION.md` in the same reviewed step when using that layout.
+Include documentation and glossary updates in the plan. Follow the project's documentation structure. Where it has none, put architecture topics in `docs/architecture/` and how-to topics in `docs/guides/`, and update the links in `ARCHITECTURE.md` or `DOCUMENTATION.md` in the same commit.
 
-## 3. Plan and implement each step
+## 4. Large: split into steps and propose a plan
 
-Pick a step whose dependencies are satisfied. Write its detailed plan in `steps/<step-id>-<short-name>.md` within the work item and check it against the approved overall plan. For tiers 1–3, proceed after this check. For tiers 4–5, show the changes, decisions for the user, affected areas, and verification method. For tier 5, include how to limit rollout impact and how to recover. Record feedback and wait for the user to approve the detailed plan before implementing it.
+In `plan.md`, state the overall outcome and split the work into ordered steps. Make each step small by the criteria in step 2 so it can be implemented, confirmed, and committed on its own. For each step, give an ID, its outcome, the changes, how you will verify it, and the steps it depends on. Call out decisions, risks, and documentation updates as in step 3.
 
-Pause a step if it rises to tier 4 or 5 or if its approved detailed plan materially changes. Record why and obtain approval for the revised detailed plan before continuing. If it adds work, follow the overall plan revision process first.
+## 5. Present the plan and ask to continue
 
-For newly discovered work you intend to take on in the current work item, including small scope additions and documentation changes, propose a revised overall plan before implementing it. Show the new work, why it came up, its tier, and the affected steps. Keep the approved version identifiable while the revision is pending. Pause dependent work and continue independent approved steps where practical. Record the user's decision and apply the usual tier rules after approval.
+Show the user the size assessment with its reason and the full plan. Ask **"Continue with this plan, or do you have feedback?"** If the user gives feedback, revise `plan.md` and present it again. Do not start implementing until the user says to continue. Mark the approved version in `plan.md`.
 
-## 4. Verify, review, and ask to commit
+## 6. Implement the plan
 
-Review the diff against the approved outcome and run the agreed checks. Record the results, review feedback, and lessons worth discussing in the step file. Present a review brief in plain language so the user can understand and assess the change before opening the diff. Scale the explanation to the change's complexity and cover:
+Implement the approved plan and run the verification it describes. For a large plan, implement one step at a time in order and finish steps 7 and 8 for each step before starting the next.
 
-- **What changed and why:** Explain the outcome and how it meets the approved step.
-- **Before → after:** Give concrete examples of the old and new behavior. For documentation edits, show the current and proposed wording with the reason for the correction.
-- **Acceptance checks:** List each agreed outcome with its check result and supporting evidence. Distinguish checks that passed, failed, or were not run, and identify claims checked only by inspection.
-- **Needs your attention:** Identify decisions, remaining uncertainty, and material risks. State when none remain.
-- **Scope and details:** List the files included in the proposed commit, including relevant work log updates, and link to the code or documentation that supports the explanation. Make the full proposed commit diff available through a working link, an expandable view, or on request.
-- **Proposed commit message:** Give the message for the changes being reviewed.
+If you find work outside the approved plan, or the approach needs to change, stop and return to step 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item to the backlog.
 
-For UI changes, include screenshots, a preview, or a walkthrough the user can follow, and state what was actually inspected. For tiers 4–5, explain affected contracts, permissions, or data and how to recover; for tier 5, include rollout controls. Keep the brief and supporting diff aligned with the same proposed commit. Ask **“Commit this step?”**
+## 7. Ask to confirm the implementation
 
-After explicit approval, commit only the reviewed changes on the current branch. If the user requests revisions or the reviewed diff changes, verify and present the updated review brief with its supporting diff available for approval again. Record the resulting commit hash in the step file and include it in the next approved log update for the work item.
+Summarize the change in plain language so the user can judge it without reading the diff:
 
-## 5. Retrospective
+- **What changed and why:** the outcome and how it meets the plan.
+- **Before → after:** concrete examples of the old and new behavior. For documentation edits, show the current and new wording.
+- **Checks:** each planned check and its result. Say which checks passed, failed, or were not run, and which claims you checked only by reading the code.
+- **Needs your attention:** decisions, remaining uncertainty, and risks, or "None".
 
-After the planned steps are complete, review the lessons with the user. In `retrospective.md`, record which lessons to adopt, revisit, or dismiss and why. Add adopted lessons to `.workflow/standards.md` with what to do, when it applies, and why. Use the review brief format from step 4: for each lesson, show the experience that supports it, the proposed decision, and how adopting it would change future work. Show the current and proposed standards wording where applicable, identify decisions still needing the user, and include the final step's commit reference in the review. List the files to commit, provide the proposed commit message, and make the full retrospective diff available as supporting detail. Ask for approval before committing it on the current branch. If the proposed changes differ after review, update the brief and supporting diff and obtain approval again.
+For UI changes, include screenshots, a preview, or steps the user can follow to try it. Offer the full diff on request. Ask **"Does this implementation look right?"** If the user asks for changes, make them and present the updated summary again.
+
+## 8. Ask to commit
+
+List the files to commit, including work item records and any glossary, backlog, or documentation edits, and the proposed commit message. Ask **"Commit this?"** After the user's explicit approval, commit only those files on the current branch.
+
+Record the commit hash in `plan.md`; it goes into the next commit. For a large plan with steps remaining, return to step 6 for the next step.
+
+## 9. Study the context and extract learnings
+
+After the last planned commit, review the whole work item: the conversation, the user's feedback and corrections, plan revisions, failed checks, and anything that was harder than expected. Extract learnings that would change how future work is done. For each, record in `learnings.md` what happened, the lesson, and how it would change future work. Leave out one-off facts that the code or docs already capture. Revisit any pending naming decisions in the glossary.
+
+If there are no learnings, say so and continue to step 11 to commit the remaining records.
+
+## 10. Ask whether to standardize or discard each learning
+
+Present the learnings and ask, for each one, whether to **standardize** or **discard** it. For each learning to standardize, propose a standard for `.workflow/standards.md` that states what to do, when it applies, and why. If it overlaps or conflicts with an existing standard, show both and ask whether to merge, replace, or keep them separate. Record each decision in `learnings.md`.
+
+Standards are applied throughout this workflow, so a new standard takes effect from the next work item onward.
+
+## 11. Ask to review and commit
+
+Present the decisions in `learnings.md`, the standards changes as current wording → proposed wording, the files to commit, and the proposed commit message. Ask **"Commit these learnings?"** If the user asks for changes, revise and ask again. After explicit approval, commit on the current branch.

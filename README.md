@@ -1,6 +1,6 @@
 # Agent Skills
 
-`initialize-workflow` sets up a Git project for tiered plan approval, step-by-step commit review, and a retrospective. `sync-workflow` keeps project docs and agent guidance aligned with the code and the skill's current templates. Both skills work in Codex and Claude Code.
+`initialize-workflow` sets up a Git project for a plan-first workflow: the agent sizes each piece of work, gets your go-ahead on a plan, asks you to confirm each change before committing it, and turns what it learned into project standards you approve. It works in Codex and Claude Code.
 
 ## Install and initialize
 
@@ -26,60 +26,46 @@ The skill seeds the glossary with verified project terms. The workflow keeps it 
 
 For existing regular `AGENTS.md` and `CLAUDE.md` files, the initializer prepends the manifesto instruction if needed and appends guidance for other missing references, preserving the original content. It leaves symlinks and all other existing files as they are.
 
-## Review changes
+## How the workflow runs
 
-Each step's review starts with a plain-language brief that explains what changed and why, gives before-and-after examples, and checks the result against the agreed outcomes. It includes check results and evidence, decisions or uncertainty needing your attention, the files to commit, and the proposed commit message. UI changes include screenshots, a preview, or a walkthrough; higher-tier changes also explain affected contracts, permissions, or data and recovery steps.
+[`WORKFLOW.md`](skills/initialize-workflow/assets/project/WORKFLOW.md) takes every change through these steps:
 
-The full diff is available through a link, an expandable view, or on request. The brief and diff describe the same proposed changes. The agent waits for your explicit approval before committing a step and presents an updated review if those changes differ. Retrospectives use the same format to connect lessons to supporting experience and proposed standards changes.
+1. **Capture the idea** in a work item under `.workflow/work-items/`.
+2. **Assess whether it is small or large.** Small work fits in one commit; large work needs several.
+3. **Small:** propose a plan.
+4. **Large:** split the work into steps that can each be committed on their own, then propose a plan.
+5. **Present the plan** and ask whether to continue or revise it.
+6. **Implement the plan.** Large work goes one step at a time, repeating steps 6–8 for each.
+7. **Ask you to confirm the implementation.**
+8. **Ask to commit.**
+9. **Study the context and extract learnings** from your feedback, corrections, and anything that was harder than expected.
+10. **Ask whether to standardize or discard each learning.** Standardized learnings go into `.workflow/standards.md`, which the agent applies in every step of later work.
+11. **Ask you to review and commit** the learnings and standards changes.
+
+## Confirm changes
+
+When implementation is done, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or steps to try it. The full diff is available on request.
+
+After you confirm the implementation, the agent lists the files to commit and the proposed commit message and waits for your explicit approval before committing.
 
 <details>
-<summary>Example reviews</summary>
+<summary>Example</summary>
 
-These examples are illustrative; filenames and check results are fictional.
-
-**Bug fix**
+This example is illustrative; filenames and check results are fictional.
 
 - **What changed and why:** Search now treats uppercase and lowercase letters equally so users can find the same items with either spelling.
 - **Before → after:** Searching for `apple` missed `Apple`; both spellings now return the same items.
-- **Acceptance checks:** Case-matching and empty-query tests passed. Existing filter behavior passed its regression checks.
-- **Needs your attention:** None remaining.
-- **Scope and details:** `src/search.js`, `tests/search.test.js`, and the step record. The review includes links to the relevant code; the full diff is available on request.
-- **Proposed commit message:** `Fix case-insensitive search`.
+- **Checks:** Case-matching and empty-query tests passed. Existing filter tests passed.
+- **Needs your attention:** None.
 
-The agent asks **“Commit this step?”**
-
-**Documentation correction**
-
-- **What changed and why:** Correct the local development command in the README.
-- **Current wording → proposed wording → evidence:** `npm run start` → `npm run dev` → `package.json` defines `dev` and has no `start` script.
-- **Acceptance checks:** Inspected the manifest and README references. The development server was not launched.
-- **Needs your attention:** None remaining; runtime behavior is unverified.
-- **Scope and details:** Only the README is proposed for editing; the full proposed diff is available on request.
-
-The agent asks for approval of those exact edits before applying them.
+The agent asks **“Does this implementation look right?”** After you confirm, it lists `src/search.js`, `tests/search.test.js`, and the work item records, proposes `Fix case-insensitive search`, and asks **“Commit this?”**
 
 </details>
 
-For an existing project, merge the updated [step review](skills/initialize-workflow/assets/project/WORKFLOW.md#4-verify-review-and-ask-to-commit) and [retrospective](skills/initialize-workflow/assets/project/WORKFLOW.md#5-retrospective) guidance into its `WORKFLOW.md`. The initializer preserves existing workflow files.
+For a project initialized with an earlier version, merge the updated [workflow template](skills/initialize-workflow/assets/project/WORKFLOW.md) into its `WORKFLOW.md`. The initializer doesn't overwrite existing workflow files.
 
 ## Track issues and features
 
 Edit `.workflow/backlog.md` directly or ask the agent to update it. The workflow records deferred follow-ups there during work and tracks progress when you select an entry to implement. Each entry has a stable ID, type, status, and space for notes and work-item links.
 
-For a project initialized before the backlog was added, rerun the updated initializer to create the backlog file. Merge the [Backlog section](skills/initialize-workflow/assets/project/WORKFLOW.md#backlog) into your existing `WORKFLOW.md`, or use `sync-workflow` to review the integration.
-
-## Sync an existing project
-
-Install `sync-workflow` and `initialize-workflow` for Codex and Claude Code from your target project. Sync uses the initializer's bundled documentation templates as its reference.
-
-```sh
-npx skills add uaandrei/agent-skills --skill initialize-workflow sync-workflow --agent codex claude-code -y
-```
-
-Invoke `$sync-workflow` in Codex or `/sync-workflow` in Claude Code. Use it for a general pass over an existing project or give it a specific feature, branch, or range to check after an AI-assisted change.
-
-Every run compares the project's workflow docs with the current skill templates, including the manifesto, agent instructions, workflow, documentation and architecture indexes, glossary guidance, standards guidance, and backlog format. This check also runs for a specific feature or branch, a clean working tree, and a dry run. Sync proposes merges that preserve project-specific content and reports any conflicts or unavailable templates.
-
-The skill also checks relevant project docs against current code, configuration, and tests. It asks about unclear findings and presents verified corrections as current wording → proposed wording → evidence, with check results and the exact proposed diff available as supporting detail. It waits for your approval of those changes before editing and follows any additional project approval rules.
-
-If the project lacks the Code Factory workflow, the skill asks whether to initialize it first or sync the existing docs. Ask for a dry run to review the findings without changing the project.
+For a project initialized before the backlog was added, rerun the updated initializer to create the backlog file and merge the [Backlog section](skills/initialize-workflow/assets/project/WORKFLOW.md#backlog) into your existing `WORKFLOW.md`.
