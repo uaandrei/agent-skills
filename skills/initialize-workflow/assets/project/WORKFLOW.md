@@ -1,14 +1,14 @@
 # Code Factory workflow
 
-Follow these steps for every project change. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository and include them in the commits you propose.
+Take every project change through the stages below. Stages are the parts of this workflow; steps are the parts of a large plan. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository and include them in the commits you propose.
 
-Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossary.md) before you start or resume a work item. Apply the standards in every step, from capturing the idea to committing. If a standard conflicts with the user's request, point out the conflict and ask how to proceed. Follow the naming rules in the project instructions whenever you introduce or rename a term, and include glossary edits in the same commit as the work that needs them.
+Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossary.md) before you start or resume a work item. Apply the standards in every stage, from capturing the idea to committing. If a standard conflicts with the user's request, point out the conflict and ask how to proceed. Follow the naming rules in the project instructions whenever you introduce or rename a term, and include glossary edits in the same commit as the work that needs them.
 
 ## Backlog
 
 Use [`.workflow/backlog.md`](.workflow/backlog.md) to track issues and feature ideas. The user can edit it directly or ask you to. Handle backlog-only requests as direct edits without a work item. Re-read the backlog before editing it, update an existing entry when it covers the same work, and preserve the user's edits.
 
-When the user picks an entry to implement, record its ID in `idea.md` and link the work item from the entry. Mark the entry **In progress** in the first implementation commit and **Done** in the learnings commit in step 11.
+When the user picks an entry to implement, record its ID in `idea.md` and link the work item from the entry. Mark the entry **In progress** in the first implementation commit and **Done** in the learnings commit in stage 11.
 
 ## 1. Capture the idea
 
@@ -29,7 +29,7 @@ Include documentation and glossary updates in the plan. Follow the project's doc
 
 ## 4. Large: split into steps and propose a plan
 
-In `plan.md`, state the overall outcome and split the work into ordered steps. Make each step small by the criteria in step 2 so it can be implemented, confirmed, and committed on its own. For each step, give an ID, its outcome, the changes, how you will verify it, and the steps it depends on. Call out decisions, risks, and documentation updates as in step 3.
+In `plan.md`, state the overall outcome and split the work into ordered steps. Make each step small by the criteria in stage 2 so it can be implemented, confirmed, and committed on its own. For each step, give an ID, its outcome, the changes, how you will verify it, and the steps it depends on. Call out decisions, risks, and documentation updates as in stage 3.
 
 ## 5. Present the plan and ask to continue
 
@@ -37,9 +37,9 @@ Show the user the size assessment with its reason and the full plan. Ask **"Cont
 
 ## 6. Implement the plan
 
-Implement the approved plan and run the verification it describes. For a large plan, implement one step at a time in order and finish steps 7 and 8 for each step before starting the next.
+Implement the approved plan and run the verification it describes. For a large plan, implement one step at a time in order and finish stages 7 and 8 for each step before starting the next.
 
-If you find work outside the approved plan, or the approach needs to change, stop and return to step 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item to the backlog.
+If you find work outside the approved plan, or the approach needs to change, stop and return to stage 5 with a revised plan that shows what changed and why. Add follow-ups you will not handle in this work item to the backlog.
 
 ## 7. Ask to confirm the implementation
 
@@ -50,19 +50,19 @@ Summarize the change in plain language so the user can judge it without reading 
 - **Checks:** each planned check and its result. Say which checks passed, failed, or were not run, and which claims you checked only by reading the code.
 - **Needs your attention:** decisions, remaining uncertainty, and risks, or "None".
 
-For UI changes, include screenshots, a preview, or steps the user can follow to try it. Offer the full diff on request. Ask **"Does this implementation look right?"** If the user asks for changes, make them and present the updated summary again.
+For UI changes, include screenshots, a preview, or instructions the user can follow to try it. Offer the full diff on request. Ask **"Does this implementation look right?"** If the user asks for changes, make them and present the updated summary again.
 
 ## 8. Ask to commit
 
 List the files to commit, including work item records and any glossary, backlog, or documentation edits, and the proposed commit message. Ask **"Commit this?"** After the user's explicit approval, commit only those files on the current branch.
 
-Record the commit hash in `plan.md`; it goes into the next commit. For a large plan with steps remaining, return to step 6 for the next step.
+Record the commit hash in `plan.md`; it goes into the next commit. For a large plan with steps remaining, return to stage 6 for the next step.
 
 ## 9. Study the context and extract learnings
 
 After the last planned commit, review the whole work item: the conversation, the user's feedback and corrections, plan revisions, failed checks, and anything that was harder than expected. Extract learnings that would change how future work is done. For each, record in `learnings.md` what happened, the lesson, and how it would change future work. Leave out one-off facts that the code or docs already capture. Revisit any pending naming decisions in the glossary.
 
-If there are no learnings, say so and continue to step 11 to commit the remaining records.
+If there are no learnings, say so and continue to stage 11 to commit the remaining records.
 
 ## 10. Ask whether to standardize or discard each learning
 

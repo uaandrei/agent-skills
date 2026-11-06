@@ -28,23 +28,23 @@ For existing regular `AGENTS.md` and `CLAUDE.md` files, the initializer prepends
 
 ## How the workflow runs
 
-[`WORKFLOW.md`](skills/initialize-workflow/assets/project/WORKFLOW.md) takes every change through these steps:
+[`WORKFLOW.md`](skills/initialize-workflow/assets/project/WORKFLOW.md) takes every change through these stages. Large work is split into plan steps.
 
 1. **Capture the idea** in a work item under `.workflow/work-items/`.
 2. **Assess whether it is small or large.** Small work fits in one commit; large work needs several.
 3. **Small:** propose a plan.
 4. **Large:** split the work into steps that can each be committed on their own, then propose a plan.
 5. **Present the plan** and ask whether to continue or revise it.
-6. **Implement the plan.** Large work goes one step at a time, repeating steps 6–8 for each.
+6. **Implement the plan.** Large work goes one plan step at a time, repeating stages 6–8 for each step.
 7. **Ask you to confirm the implementation.**
 8. **Ask to commit.**
 9. **Study the context and extract learnings** from your feedback, corrections, and anything that was harder than expected.
-10. **Ask whether to standardize or discard each learning.** Standardized learnings go into `.workflow/standards.md`, which the agent applies in every step of later work.
+10. **Ask whether to standardize or discard each learning.** Standardized learnings go into `.workflow/standards.md`, which the agent applies in every stage of later work.
 11. **Ask you to review and commit** the learnings and standards changes.
 
 ## Confirm changes
 
-When implementation is done, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or steps to try it. The full diff is available on request.
+When implementation is done, the agent summarizes the change in plain language so you can judge it without reading the diff: what changed and why, before-and-after examples, each check and its result, and anything that needs your attention. UI changes include screenshots, a preview, or instructions to try it. The full diff is available on request.
 
 After you confirm the implementation, the agent lists the files to commit and the proposed commit message and waits for your explicit approval before committing.
 
