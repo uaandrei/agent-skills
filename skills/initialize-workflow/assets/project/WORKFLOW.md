@@ -1,14 +1,41 @@
 # Code Factory workflow
 
-Take every project change through the stages below. Stages are the parts of this workflow; steps are the parts of a large plan. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository through stage 11 and include them in the commits you propose. After the workflow ends, completed work items may be deleted as described below.
+During a [dev session](#dev-sessions), take every project change through the stages below. Stages are the parts of this workflow; steps are the parts of a large plan. Work from the repository root in the existing checkout and on its current branch. Keep work item records in the repository through stage 11 and include them in the commits you propose. After the workflow ends, completed work items may be deleted as described below.
 
 Read [`.workflow/standards.md`](.workflow/standards.md) and [glossary.md](glossary.md) before you start or resume a work item. Apply the standards in every stage, from capturing the idea to committing. If a standard conflicts with the user's request, point out the conflict and ask how to proceed. Follow the naming rules in the project instructions whenever you introduce or rename a term, and include glossary edits in the same commit as the work that needs them.
 
+## Dev sessions
+
+Apply this workflow only during a dev session. A dev session starts when the user invokes `start-dev` and lasts until they invoke `end-dev` or the conversation ends. A new conversation starts outside a dev session. The [manifesto](manifesto.md) applies both in and outside dev sessions.
+
+Outside a dev session, handle requests directly. Do not create or update work items, capture requests in the backlog, update the glossary or standards, or ask for the workflow's plan, confirmation, or commit approvals unless the user asks for one of them. If a request would continue an **In progress** work item, ask whether to start a dev session first.
+
+### Start a dev session
+
+When the user invokes `start-dev`:
+
+1. Read this workflow, [`.workflow/standards.md`](.workflow/standards.md), [glossary.md](glossary.md), and [`.workflow/backlog.md`](.workflow/backlog.md). Read them again whenever they are no longer in context during the session, such as after the conversation is summarized.
+2. Reconcile the backlog with existing work item records as described in [Backlog](#backlog). Capture requests made earlier in the conversation, before the dev session started, only if the user brings them into the session.
+3. If the user named a request with `start-dev`, start or resume its work item at stage 1. Otherwise, list the **In progress** entries with their current stage, step, and pending actions, and the **Open** entries, then ask what to work on.
+
+If a dev session is already active, say so and continue it.
+
+### End a dev session
+
+When the user invokes `end-dev`:
+
+1. Stop at the current point without starting another stage, plan step, check, or commit.
+2. Update the records and backlog entry of each work item touched in this session with its current stage and step, completed and remaining work, latest check results, and pending decisions or approvals, so a later dev session can resume from them.
+3. Report each of those work items' status and pending decisions or approvals, and list uncommitted changes, including these record updates. Do not commit them; they go into the next commit approved in a later dev session.
+4. Tell the user the dev session has ended. Handle later requests in the conversation outside the workflow until the user invokes `start-dev` again.
+
+If no dev session is active, say so and change nothing.
+
 ## Backlog
 
-Keep [`.workflow/backlog.md`](.workflow/backlog.md) current with project change requests from chat without waiting for the user to ask for a backlog update. Capture requests to fix, add, or change something, including corrections and deferred follow-ups. Update the existing entry when a request refines the same outcome; create separate entries for independently actionable requests. Record the requested outcome and relevant constraints in the notes. Questions or discussion without a requested project change do not need entries.
+During a dev session, keep [`.workflow/backlog.md`](.workflow/backlog.md) current with project change requests from chat without waiting for the user to ask for a backlog update. Capture requests to fix, add, or change something, including corrections and deferred follow-ups. Update the existing entry when a request refines the same outcome; create separate entries for independently actionable requests. Record the requested outcome and relevant constraints in the notes. Questions or discussion without a requested project change do not need entries.
 
-When starting or resuming work, reconcile the available conversation and work item records with the backlog: capture missing requests, apply the user's latest scope changes, and correct stale progress. Re-read the backlog before editing it and preserve the user's edits, stable IDs, and unrelated entries. Handle backlog-only requests as direct edits without a work item.
+When starting or resuming work, reconcile the dev session's conversation and work item records with the backlog: capture missing requests, apply the user's latest scope changes, and correct stale progress. Re-read the backlog before editing it and preserve the user's edits, stable IDs, and unrelated entries. Handle backlog-only requests as direct edits without a work item.
 
 When starting a work item, record its backlog ID in `idea.md` and link the work item from the entry. Keep the status and notes current throughout the workflow:
 

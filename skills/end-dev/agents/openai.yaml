@@ -1,0 +1,5 @@
+interface:
+  display_name: "End Dev"
+  short_description: "Stop applying the workflow"
+policy:
+  allow_implicit_invocation: false

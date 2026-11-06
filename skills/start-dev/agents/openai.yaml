@@ -1,0 +1,5 @@
+interface:
+  display_name: "Start Dev"
+  short_description: "Apply the workflow until end-dev"
+policy:
+  allow_implicit_invocation: false
