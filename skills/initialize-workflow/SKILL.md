@@ -1,6 +1,6 @@
 ---
 name: initialize-workflow
-description: Initialize or restore missing files for the Code Factory workflow in a project: a mandatory project manifesto; a four-stage workflow (capture the idea, plan it, review the plan, implement it with validation) tracked in work items, which applies during dev sessions started with start-dev and ended with end-dev, where end-dev proposes learnings that become project standards or workflow improvements; a project glossary; project standards; and agent instructions.
+description: "Initialize or restore missing files for the Code Factory workflow in a project: a mandatory project manifesto; a four-stage workflow (capture the idea, plan it, review the plan, implement it with validation) tracked in work items, which applies during dev sessions started with start-dev and ended with end-dev, where end-dev proposes learnings that become project standards or workflow improvements; a project glossary; project standards; and agent instructions."
 ---
 
 # Initialize workflow
